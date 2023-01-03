@@ -21,10 +21,8 @@ export default function ReactHookFormWithMUI() {
   };
   const methods = useForm({ defaultValue });
   const {
-    reset,
     setError,
     handleSubmit,
-    control,
     formState: { errors, isSubmitting },
   } = methods;
   const [showPassword, setShowPassword] = useState(false);
