@@ -10,9 +10,7 @@ function FCheckBox({ name, ...other }) {
           {...other}
           name={name}
           control={control}
-          render={({ field }) => {
-            <CheckBox {...field} checked={field.value} />;
-          }}
+          render={({ field }) => <CheckBox {...field} checked={field.value} />}
         />
       }
     />

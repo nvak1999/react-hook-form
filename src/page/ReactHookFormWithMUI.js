@@ -1,8 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
@@ -11,15 +9,19 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { useForm } from "react-hook-form";
 import { Stack } from "@mui/system";
 import { Alert } from "@mui/material";
-import { FCheckBox, FTextField, FormProvider } from "../component/form";
-
+import FCheckBox from "../component/form/FCheckBox";
+import FTextField from "../component/form/FTextField";
+import FormProvider from "../component/form/FormProvider";
+import FMultiCheckbox from "../component/form/FMultiCheckbox";
+import FRadioGroup from "../component/form/FRadioGroup";
 export default function ReactHookFormWithMUI() {
-  const defaultValue = {
+  const defaultValues = {
     email: "khuong@gmail.com",
     password: "123",
     remember: true,
+    gender: [],
   };
-  const methods = useForm({ defaultValue });
+  const methods = useForm({ defaultValues });
   const {
     setError,
     handleSubmit,
@@ -32,22 +34,17 @@ export default function ReactHookFormWithMUI() {
   };
 
   return (
-    <Container
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
+    <div style={{ width: 500, marginTop: 0, margin: "auto" }}>
       <Typography variant="h3" textAlign="center" mb={3}>
         React Hook Form
       </Typography>
+
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
           {!!errors.afterSubmit && (
             <Alert severity="error">{errors.afterSubmit.message}</Alert>
           )}
+
           <FTextField name="email" label="Email address" />
           <FTextField
             name="password"
@@ -75,6 +72,7 @@ export default function ReactHookFormWithMUI() {
           justifyContent="space-between"
           sx={{ my: 2 }}
         >
+          <FRadioGroup name="gender" options={["Male", "Female"]} />
           <FCheckBox name="remember" label="Remember me" />
         </Stack>
         <LoadingButton
@@ -87,6 +85,6 @@ export default function ReactHookFormWithMUI() {
           Login
         </LoadingButton>
       </FormProvider>
-    </Container>
+    </div>
   );
 }

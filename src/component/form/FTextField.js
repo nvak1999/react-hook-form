@@ -7,15 +7,15 @@ function FTextField({ name, ...other }) {
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error } }) => {
+      render={({ field, fieldState: { error } }) => (
         <TextFields
           {...field}
           fullWidth
           error={!!error}
           helperText={error?.message}
           {...other}
-        />;
-      }}
+        />
+      )}
     />
   );
 }
